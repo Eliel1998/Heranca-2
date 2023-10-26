@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html th:replace="~{layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{head :: head(~{})}"></head>
+
+<body>
+<main>
+    <h1>FORM</h1>
+    <form th:action=" ${pessoa.id == null || pessoa.id < 1 } ?  @{/pessoa/{tipo}/save(tipo=${tipo})} : @{/pessoa/{tipo}/update(tipo=${tipo})} " th:object="${pessoa}"  method="post">
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{nome}" placeholder="Nome">
+        <input type="text" th:field="*{telefone}"  th:if="${tipo.equals('paciente')}" placeholder="Telefone">
+        <input type="text" th:if="${tipo.equals('medico')}" th:field="*{crm}" placeholder="Crm">
+        <input type="submit" value="Enviar">
+    </form>
+</main>
+</body>
+
+</html>

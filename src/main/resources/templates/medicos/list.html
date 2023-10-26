@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{head :: head(~{})}"></head>
+
+
+<body>
+<main>
+    <h1>Medicos</h1>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>CRM</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        </thead>
+        <tr th:each="m : ${medicos}">
+            <td th:text="${m.getId()}"></td>
+            <td th:text="${m.getNome()}"></td>
+            <td th:text="${m.getCrm()}"></td>
+            <td><a th:href="@{/pessoa/medico/edit/{id}(id=${m.id})}">Editar</a></td>
+            <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                   th:href="@{/pessoa/medico/remove/{id}(id=${m.getId()})}">Excluir</a></td>
+        </tr>
+    </table>
+</main>
+<div th:insert="~{footer :: footer}"></div>
+
+</body>
+</html>
+
