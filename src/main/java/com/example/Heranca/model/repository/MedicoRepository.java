@@ -28,6 +28,11 @@ public class MedicoRepository {
         em.remove(buscar(id));
     }
 
+    public List<Medico> medicos() {
+        Query query = em.createQuery("FROM Pessoa p WHERE TYPE(p) = Medico");
+        return query.getResultList();
+    }
+
     public Medico buscar(Long id) {
         return em.find(Medico.class, id);
     }

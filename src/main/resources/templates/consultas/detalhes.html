@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{head :: head(~{})}"></head>
+
+<body>
+<main>
+    <div id="text"></div>
+    <h1>Detalhes da consulta</h1>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+
+            <th>Observacao</th>
+            <th>Paciente</th>
+            <th>Medico</th>
+            <th>Valor</th>
+        </tr>
+        </thead>
+
+        <tr th:each="c : ${consulta}">
+            <td th:text="${c.observacao}"></td>
+            <td><a th:text="${c.paciente.getNome()}" />
+            <td><a th:text="${c.medico.getNome()}" />
+            <td th:text="${c.valor}"></td>
+        </tr>
+    </table>
+</main>
+
+<div th:insert="~{footer :: footer}"></div>
+
+</body>
+
+</html>
+
+<!--<td><a th:text="${c.paciente.getNome()}" th:href="@{/pacientes/consultas/{id}(id=${c.paciente.getId()})}"/>-->
+<!--</td>-->
+<!--<td><a th:text="${c.medico.getNome()}" th:href="@{/medicos/medico/{id}(id=${c.medico.getId()})}"/></td>-->

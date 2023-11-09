@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{head :: head(~{})}"></head>
+
+<body>
+<main>
+    <h1>Consultas</h1>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Paciente</th>
+            <th>Medico</th>
+            <th>Detalhes</th>
+        </tr>
+        </thead>
+
+        <tr th:each="c : ${consultas}">
+            <td th:text="${c.data}"></td>
+            <td th:text="${c.valor}"></td>
+            <td th:text="${c.paciente.getNome()}"></td>
+            <td th:text="${c.medico.getNome()}"></td>
+            <td><a th:href="@{/consultas/listDetalhada/{id}(id=${c.getId()})}">Ver consulta</a></td>
+        </tr>
+    </table>
+</main>
+
+<div th:insert="~{footer :: footer}"></div>
+
+</body>
+</html>

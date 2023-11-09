@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html th:replace="~{layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{head :: head(~{})}"></head>
+
+<body>
+<main class="container">
+    <h1>Formulário de consulta</h1>
+    <form  th:action="@{/consultas/save}"   th:object="${consulta}" method="post" >
+        <h5>Paciente</h5>
+        <select id="paciente" name="paciente" th:field="*{paciente.id}" th:errorclass="is-invalid" class="form-select mt-2">
+            <option value="">Selecionar</option>
+            <option th:each="p : ${pacientes}"
+                    th:value="${p.id}"
+                    th:text="${p.nome}">
+            </option>
+        </select>
+        <h5 style="margin-top: 15px">Médico</h5>
+        <select id="medico" name="medico" th:field="*{medico.id}" th:errorclass="is-invalid" class="form-select mt-2">
+            <option value="">Selecionar</option>
+            <option th:each="m : ${medicos}"
+                    th:value="${m.id}"
+                    th:text="${m.nome}">
+            </option>
+        </select>
+
+        <h5 style="margin-top: 15px">Detalhes da consulta</h5>
+
+        <input type="hidden" th:field="*{id}">
+        <input type="datetime-local" th:field="*{data}" placeholder="Data da consulta">
+        <input type="text" th:field="*{observacao}" placeholder="Observação">
+        <input type="text" th:field="*{valor}" placeholder="Valor da consulta">
+        <input type="submit" value="Enviar">
+    </form>
+</main>
+</body>
+
+</html>
