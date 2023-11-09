@@ -3,7 +3,7 @@
 <head th:replace="~{head :: head(~{})}"></head>
 
 <body>
-<main>
+<main class="container">
     <h1>Consultas</h1>
     <table class="table" border="1">
         <thead>
@@ -14,6 +14,8 @@
             <th>Paciente</th>
             <th>Medico</th>
             <th>Detalhes</th>
+            <th>Editar</th>
+            <th>Excluir</th>
         </tr>
         </thead>
 
@@ -23,6 +25,9 @@
             <td th:text="${c.paciente.getNome()}"></td>
             <td th:text="${c.medico.getNome()}"></td>
             <td><a th:href="@{/consultas/listDetalhada/{id}(id=${c.getId()})}">Ver consulta</a></td>
+            <td><a th:href="@{/consultas/update/{id}(id=${c.getId()})}">Editar</a></td>
+            <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                   th:href="@{/consultas/remove/{id}(id=${c.getId()})}">Remover</a></td>
         </tr>
     </table>
 </main>

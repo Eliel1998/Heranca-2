@@ -39,6 +39,27 @@ public class ConsultaController {
         return "/consultas/form";
     }
 
+    @GetMapping("/remove/{id}")
+    public ModelAndView remove(@PathVariable("id") Long id){
+        repository.remover(id);
+        return new ModelAndView("redirect:/consultas/list");
+    }
+
+    @GetMapping("/update/{id}")
+    public ModelAndView update(@PathVariable("id") Long id, ModelMap model){
+        Consulta consulta = repository.getConsulta(id);
+        model.addAttribute("consulta", consulta);
+        model.addAttribute("pacientes",pacienteRepository.pacientes());
+        model.addAttribute("medicos",medicoRepository.medicos());
+        return new ModelAndView("/consultas/form", model);
+    }
+
+    @PostMapping("/atualiazar")
+    public ModelAndView atualiza(Consulta consulta){
+        repository.atualizar(consulta);
+        return new ModelAndView("redirect:/consultas/list");
+    }
+
     @PostMapping("/save")
     public ModelAndView save(Consulta consulta){
         System.out.println(consulta.toString());

@@ -22,12 +22,15 @@ public class ConsultaRepository {
         em.persist(consulta);
     }
 
-    public List<Consulta> consultasPorPaciente(Long id){
-        Query query = em.createQuery("from Consulta where paciente.id = :id");
-        query.setParameter("id", id);
-        System.out.println(query.getResultList());
-        return query.getResultList();
+    public void atualizar(Consulta consulta) {
+        em.merge(consulta);
     }
+
+    public void remover(Long id) {
+        em.remove(em.getReference(Consulta.class, id));
+    }
+
+
 
     public Consulta getConsulta(Long id){
         Query query = em.createQuery("from Consulta where id = :id");
@@ -35,15 +38,4 @@ public class ConsultaRepository {
         return (Consulta) query.getSingleResult();
     }
 
-    public double totalConsultas (){
-        Query query = em.createQuery("select sum(valor) from Consulta");
-        return (double) query.getSingleResult();
-    }
-
-    public List<Consulta> consultasPorMedico(Long id){
-        Query query = em.createQuery("from Consulta where medico.id = :id");
-        query.setParameter("id", id);
-        System.out.println(query.getResultList());
-        return query.getResultList();
-    }
 }

@@ -6,7 +6,7 @@
 <body>
 <main class="container">
     <h1>Formulário de consulta</h1>
-    <form  th:action="@{/consultas/save}"   th:object="${consulta}" method="post" >
+    <form  th:action=" ${consulta.id == null || consulta.id < 1 } ? @{/consultas/save} : @{/consultas/atualiazar}"   th:object="${consulta}" method="post" >
         <h5>Paciente</h5>
         <select id="paciente" name="paciente" th:field="*{paciente.id}" th:errorclass="is-invalid" class="form-select mt-2">
             <option value="">Selecionar</option>
